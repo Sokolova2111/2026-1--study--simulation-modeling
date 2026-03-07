@@ -1,3 +1,14 @@
+# Changelog
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+### 1.4.7 (2026-03-07)
+
+
+### Features
+
+* **main:** make course structure ([bf6b050](https://github.com/yamadharma/course-directory-student-template/commit/bf6b0508fb89e523cbd7ceb0e4d4a9fc27b5b861))
+
 ## [1.4.7](https://github.com/yamadharma/course-directory-student-template/compare/v1.4.6...v1.4.7) (2026-02-17)
 
 
@@ -248,7 +259,3 @@
 * **make:** add help to Makefile ([8015255](https://github.com/yamadharma/course-directory-student-template/commit/8015255d434b2a4735f0ea406ef99be4d68f8b6f))
 * **make:** add list of courses ([395c5da](https://github.com/yamadharma/course-directory-student-template/commit/395c5da4de44d792ee5ceb45f255004a0e0f7e30))
 * **script:** add script for auto-determine name of course ([10a8b58](https://github.com/yamadharma/course-directory-student-template/commit/10a8b58ccf830930dc6daf15d664582ce87913e3))
-
-
-
-
