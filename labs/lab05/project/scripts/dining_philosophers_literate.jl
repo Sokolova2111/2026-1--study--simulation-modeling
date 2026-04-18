@@ -1,0 +1,62 @@
+# # Обедающие философы - базовый эксперимент
+# 
+# Данный скрипт демонстрирует моделирование задачи "Обедающие философы"
+# с помощью сетей Петри. Сравниваются классическая модель (с deadlock)
+# и модель с арбитром (без deadlock).
+
+using DrWatson
+@quickactivate "project"
+include(srcdir("DiningPhilosophers.jl"))
+using .DiningPhilosophers
+using DataFrames, CSV, Plots
+
+# ## Параметры модели
+# 
+# - `N` - количество философов (и вилок)
+# - `tmax` - максимальное время симуляции
+
+N = 5
+tmax = 50.0
+
+# ## 1. Классическая сеть (без арбитра)
+
+println("=== Классическая сеть (без арбитра) ===")
+net_classic, u0_classic, _ = build_classical_network(N)
+
+# Запуск стохастической симуляции
+df_classic = simulate_stochastic(net_classic, u0_classic, tmax)
+
+# Сохранение результатов
+CSV.write(datadir("dining_classic.csv"), df_classic)
+
+# Проверка на deadlock
+dead = detect_deadlock(df_classic, net_classic)
+println("Deadlock обнаружен: $dead")
+
+# Построение графиков
+plot_classic = plot_marking_evolution(df_classic, N)
+savefig(plotsdir("classic_simulation.png"))
+
+# ## 2. Сеть с арбитром
+
+println("\n=== Сеть с арбитром ===")
+net_arb, u0_arb, _ = build_arbiter_network(N)
+
+# Запуск стохастической симуляции
+df_arb = simulate_stochastic(net_arb, u0_arb, tmax)
+
+# Сохранение результатов
+CSV.write(datadir("dining_arbiter.csv"), df_arb)
+
+# Проверка на deadlock
+dead_arb = detect_deadlock(df_arb, net_arb)
+println("Deadlock обнаружен: $dead_arb")
+
+# Построение графиков
+plot_arb = plot_marking_evolution(df_arb, N)
+savefig(plotsdir("arbiter_simulation.png"))
+
+# ## Выводы
+# 
+# - Классическая сеть приводит к deadlock (все философы голодны)
+# - Сеть с арбитром предотвращает deadlock
